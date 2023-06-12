@@ -8,12 +8,17 @@ import { HousingLocation } from '../housing-location';
 })
 export class HousingListComponent implements OnInit {
   @Input() locationList: HousingLocation[] = [];
+  results: HousingLocation[] = [];
 
   constructor() {}
 
   ngOnInit(): void {}
 
   searchHousingLocations(searchText: string) {
-    console.log(searchText);
+    if (!searchText) return;
+
+    this.results = this.locationList.filter((location) =>
+      location.city.toLowerCase().includes(searchText.toLowerCase())
+    );
   }
 }
